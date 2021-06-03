@@ -1,0 +1,19 @@
+Lab 1 Project Report
+
+Module design:
+
+    The module is built to convert 13 bit binary input to the equivalent floating point encoding. The module accepts input D[12:0] and outputs the MSB S, the exponent E, and the significand (or mantissa) F, which are one bit, 3 bits, and 5 bits, respectively. 
+    Since S depends only on the most significant bit, the module first checks what the MSB is and outputs it as S. This is equivalent to D[12] in Verilog.
+    The next section of the module is an always block that uses the MSB to determine if the input should be inverted. If the MSB is 0, the input is positive and no conversion is necessary. If the MSB is 1, the input is negative, and the input is converted and incremented by 1. This value is stored in the "converted" register variable. There is an edge case here if the input is 1_0000_0000_0000; converting this value returns the same value. This edge case is handled explicitly by setting S, E, and F to all 1s, returning the largest possible value.
+    The next section is the final section that handles the output of E and F in any other case. This always block is one section because of possible edge cases and because handling rounding can alter E and F. First, the leading zeros are counted with a while loop. If leading zeros is greater than 7, then no rounding is necessary, and E is set to 0 and F is the final 5 zeros. Otherwise, rounding is necessary. E is set based on the leading zeros and F is set based on the next 5 values. If the next (6th) bit is 0, this is the final output. If it's 1, then F is incremented. However if F is the maximum value of 11111, then it's incremented and shifted right by 1, and E is incremented. However, if E is the max value, the final output is 13'b1_1111_1111_1111. This is handled with nested if statements.
+
+Testbench design:
+
+    My testbench unit tests the module by passing multiple different inputs for D. Within these test cases, I have typical inputs and edge cases. The edge cases include testing the case 13'b1_0000_0000_0000, 13'b1_0000_0000_0001 (which becomes 1_1111_1111_1111 after conversion), etc. The module waits before testing each value by 100 time units. I confirmed that the module was working correctly by examining the waveform output. 
+
+Simulation output:
+    asdf
+
+Hand-drawn Design Schematic:
+
+    asdf
