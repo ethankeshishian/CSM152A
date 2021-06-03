@@ -9,14 +9,14 @@ Analyzing Verilog file "/home/ise/CSM152A/Lab1/testbench_105422235.v" into libra
 Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 94948 KB
-Fuse CPU Usage: 1290 ms
+Fuse Memory Usage: 94952 KB
+Fuse CPU Usage: 1490 ms
 Compiling module FPCVT
 Compiling module testbench_105422235
 Compiling module glbl
 Time Resolution for simulation is 1ps.
 Compiled 3 Verilog Units
 Built simulation executable /home/ise/CSM152A/Lab1/testbench_105422235_isim_beh.exe
-Fuse Memory Usage: 98084 KB
-Fuse CPU Usage: 1300 ms
+Fuse Memory Usage: 98088 KB
+Fuse CPU Usage: 1510 ms
 GCC CPU Usage: 240 ms

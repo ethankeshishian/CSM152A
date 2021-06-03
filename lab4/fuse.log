@@ -9,14 +9,14 @@ Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into li
 Starting static elaboration
 WARNING:HDLCompiler:1016 - "/home/ise/CSM152A/lab4/testbench_105422235.v" Line 39: Port led_seg is not connected to this instance
 Completed static elaboration
-Fuse Memory Usage: 94996 KB
-Fuse CPU Usage: 1300 ms
+Fuse Memory Usage: 94992 KB
+Fuse CPU Usage: 1470 ms
 Compiling module parking_meter
 Compiling module testbench_105422235
 Compiling module glbl
 Time Resolution for simulation is 1ps.
 Compiled 3 Verilog Units
 Built simulation executable /home/ise/CSM152A/lab4/testbench_105422235_isim_beh.exe
-Fuse Memory Usage: 98280 KB
-Fuse CPU Usage: 1320 ms
-GCC CPU Usage: 110 ms
+Fuse Memory Usage: 98276 KB
+Fuse CPU Usage: 1490 ms
+GCC CPU Usage: 100 ms
