@@ -1,0 +1,19 @@
+xst -intstyle ise -ifn "/home/ise/CSM152A/lab2/clock_gen.xst" -ofn "/home/ise/CSM152A/lab2/clock_gen.syr" 
+xst -intstyle ise -ifn "/home/ise/CSM152A/lab2/clock_gen.xst" -ofn "/home/ise/CSM152A/lab2/clock_gen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx16-csg324-3 clock_gen.ngc clock_gen.ngd  
+xst -intstyle ise -ifn "/home/ise/CSM152A/lab2/clock_gen.xst" -ofn "/home/ise/CSM152A/lab2/clock_gen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx16-csg324-3 clock_gen.ngc clock_gen.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o clock_gen_map.ncd clock_gen.ngd clock_gen.pcf 
+par -w -intstyle ise -ol high -mt off clock_gen_map.ncd clock_gen.ncd clock_gen.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml clock_gen.twx clock_gen.ncd -o clock_gen.twr clock_gen.pcf 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx16-csg324-3 clock_gen.ngc clock_gen.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o clock_gen_map.ncd clock_gen.ngd clock_gen.pcf 
+par -w -intstyle ise -ol high -mt off clock_gen_map.ncd clock_gen.ncd clock_gen.pcf 
+vhdtdtfi -lib work /home/ise/CSM152A/lab2/clock_gen.v -lang verilog -prj lab2 -o clock_gen.spl -module clock_gen -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan6 clock_gen.spl /home/ise/CSM152A/lab2/clock_gen.sym 
+bitgen -intstyle ise -f clock_gen.ut clock_gen.ncd 
+xst -intstyle ise -ifn "/home/ise/CSM152A/lab2/clock_gen.xst" -ofn "/home/ise/CSM152A/lab2/clock_gen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx16-csg324-3 clock_gen.ngc clock_gen.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o clock_gen_map.ncd clock_gen.ngd clock_gen.pcf 
+par -w -intstyle ise -ol high -mt off clock_gen_map.ncd clock_gen.ncd clock_gen.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml clock_gen.twx clock_gen.ncd -o clock_gen.twr clock_gen.pcf 

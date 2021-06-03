@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/ise/CSM152A/lab2/clock_gen.ncd
+OUTFILE=/home/ise/CSM152A/lab2/clock_gen.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=/home/ise/CSM152A/lab2
+LICENSE=WebPack
+USER_INFO=212183624_0_0_930

@@ -1,0 +1,198 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/trce -intstyle ise -v 3 -s 3 -n
+3 -fastpaths -xml vending_machine.twx vending_machine.ncd -o
+vending_machine.twr vending_machine.pcf
+
+Design file:              vending_machine.ncd
+Physical constraint file: vending_machine.pcf
+Device,package,speed:     xc6slx16,csg324,C,-3 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock ITEM_CODE<0> to Pad
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                                      | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s)                     | Phase  |
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+COST<0>     |         9.569(F)|      SLOW  |         5.461(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<1>     |         9.383(F)|      SLOW  |         5.351(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<2>     |         9.569(F)|      SLOW  |         5.461(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+
+Clock ITEM_CODE<1> to Pad
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                                      | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s)                     | Phase  |
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+COST<0>     |         8.988(F)|      SLOW  |         5.068(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<1>     |         8.802(F)|      SLOW  |         4.958(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<2>     |         8.988(F)|      SLOW  |         5.068(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+
+Clock ITEM_CODE<2> to Pad
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                                      | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s)                     | Phase  |
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+COST<0>     |         8.983(F)|      SLOW  |         5.090(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<1>     |         8.797(F)|      SLOW  |         4.980(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<2>     |         8.983(F)|      SLOW  |         5.090(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+
+Clock KEY_PRESS to Pad
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                                      | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s)                     | Phase  |
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+COST<0>     |         7.144(F)|      SLOW  |         3.922(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<1>     |         6.958(F)|      SLOW  |         3.812(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+COST<2>     |         7.144(F)|      SLOW  |         3.922(F)|      FAST  |current_state[5]_PWR_13_o_Select_550_o|   0.000|
+------------+-----------------+------------+-----------------+------------+--------------------------------------+--------+
+
+Clock to Setup on destination clock CARD_IN
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.139|         |
+ITEM_CODE<0>   |         |         |    2.864|    5.717|
+ITEM_CODE<1>   |         |         |    2.283|    5.717|
+ITEM_CODE<2>   |         |         |    2.278|    5.717|
+KEY_PRESS      |         |         |    1.871|    5.717|
+RELOAD         |         |         |    0.555|    0.555|
+RESET          |         |         |    0.992|    0.992|
+VALID_TRAN     |         |         |    1.237|    8.730|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CARD_IN        |         |    2.536|         |         |
+RELOAD         |         |    2.536|         |         |
+RESET          |    1.237|    2.536|         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ITEM_CODE<0>
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.177|         |
+ITEM_CODE<0>   |         |         |    0.580|    1.639|
+ITEM_CODE<1>   |         |         |    0.287|    1.639|
+ITEM_CODE<2>   |         |         |    0.130|    1.639|
+KEY_PRESS      |         |         |         |    1.639|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ITEM_CODE<1>
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.177|         |
+ITEM_CODE<0>   |         |         |    1.198|    1.639|
+ITEM_CODE<1>   |         |         |    0.744|    1.639|
+ITEM_CODE<2>   |         |         |    0.562|    1.639|
+KEY_PRESS      |         |         |         |    1.639|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ITEM_CODE<2>
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.177|         |
+ITEM_CODE<0>   |         |         |    1.585|    1.639|
+ITEM_CODE<1>   |         |         |    1.131|    1.639|
+ITEM_CODE<2>   |         |         |    0.893|    1.639|
+KEY_PRESS      |         |         |         |    1.639|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock KEY_PRESS
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.177|         |
+ITEM_CODE<0>   |         |         |    1.619|    1.639|
+ITEM_CODE<1>   |         |         |    1.165|    1.639|
+ITEM_CODE<2>   |         |         |    0.927|    1.639|
+KEY_PRESS      |         |         |         |    1.639|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock RELOAD
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.139|         |
+ITEM_CODE<0>   |         |         |    2.932|    5.717|
+ITEM_CODE<1>   |         |         |    2.351|    5.717|
+ITEM_CODE<2>   |         |         |    2.346|    5.717|
+KEY_PRESS      |         |         |    1.939|    5.717|
+RELOAD         |         |         |    0.623|    0.623|
+RESET          |         |         |    1.060|    1.060|
+VALID_TRAN     |         |         |    1.305|    8.730|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock RESET
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    3.139|         |
+ITEM_CODE<0>   |         |         |    2.776|    5.717|
+ITEM_CODE<1>   |         |         |    2.195|    5.717|
+ITEM_CODE<2>   |         |         |    2.190|    5.717|
+KEY_PRESS      |         |         |    1.783|    5.717|
+RELOAD         |         |         |    0.467|    0.467|
+RESET          |         |         |    0.904|    0.904|
+VALID_TRAN     |         |         |    1.149|    8.730|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock VALID_TRAN
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |         |         |    5.759|         |
+VALID_TRAN     |         |         |         |    2.090|
+---------------+---------+---------+---------+---------+
+
+
+Analysis completed Sun May 23 10:54:00 2021 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 394 MB
+
+
+

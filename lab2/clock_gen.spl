@@ -1,0 +1,20 @@
+[Inputs]
+clk_in
+rst
+[Outputs]
+clk_div_2
+clk_div_4
+clk_div_8
+clk_div_16
+clk_div_32
+clk_div_26
+clk_div_3
+clk_pos
+clk_neg
+clk_div_5
+clk_div
+=toggle_counter[7:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel clock_gen
+
