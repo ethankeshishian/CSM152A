@@ -49,6 +49,7 @@ module testbench_105422235;
 /* Global variables */
 parameter CLOCK = 10;
 parameter SECOND = CLOCK * 100;
+parameter CLOCK_CYCLE = 20;
 
 	initial begin
 		// Initialize Inputs
@@ -72,19 +73,19 @@ parameter SECOND = CLOCK * 100;
 		/* Testing zero state */
 		wait_10_seconds();
 		
-		/* Testing add1 */
+		/* Testing single add1 */
 		add60();
 		wait_2_seconds();
 		
-		/* Testing add2 */
+		/* Testing single add2 */
 		add120();
 		wait_2_seconds();
 		
-		/* Testing add3 */
+		/* Testing single add3 */
 		add180();
 		wait_2_seconds();
 		
-		/* Testing add4 */
+		/* Testing single add4 */
 		add300();
 		wait_2_seconds();
 		
@@ -113,10 +114,59 @@ parameter SECOND = CLOCK * 100;
 		wait_10_seconds();
 		wait_10_seconds();
 		
-		/* Testing overflow correction */
+		/* Testing overflow correction and multiple consecutive add presses*/
 		reset();
+		add_overflow();
+		wait_10_seconds();
+				
+		/* Testing reset1 from non-zero value */
+		reset1();
 		
-		/* Testing multiple add presses */
+		/* Testing reset2 from non-zero value */
+		reset2();
+		
+		/* Testing adding time in S_3MIN state to flashing number */
+		reset1();
+		wait_2_seconds();
+		add60();
+		wait_2_seconds();
+		
+		/* Testing rst1 from rst */
+		rst = 1;
+		#CLOCK_CYCLE;
+		rst = 0;
+		rst1 = 1;
+		#CLOCK_CYCLE;
+		rst1 = 0;
+		wait_2_seconds;
+		
+		/* Testing rst2 from rst */
+		rst = 1;
+		#CLOCK_CYCLE;
+		rst = 0;
+		rst2 = 1;
+		#CLOCK_CYCLE;
+		rst2 = 0;
+		wait_2_seconds;
+				
+		/* Testing rst2 from rst1 */
+		rst1 = 1;
+		#CLOCK_CYCLE;
+		rst1 = 0;
+		rst2 = 1;
+		#CLOCK_CYCLE;
+		rst2 = 0;
+		wait_2_seconds;
+		
+		/* Testing rst1 from rst2 */
+		rst2 = 1;
+		#CLOCK_CYCLE;
+		rst2 = 0;
+		rst1 = 1;
+		#CLOCK_CYCLE;
+		rst1 = 0;
+		wait_2_seconds;
+
 		
 		$finish;
 
@@ -193,9 +243,10 @@ task add300;
 	end
 endtask;
 
-task add10000;
+task add_overflow;
 	begin 
 		add4 = 1;
+		#CLOCK;
 		wait_for_overflow();
 		add4 = 0;
 		#CLOCK;
@@ -209,12 +260,18 @@ task wait_2_seconds;
 	end
 endtask;
 
+task wait_3_seconds;
+	begin
+		#(3 * SECOND);
+	end
+endtask;
+
+
 task wait_5_seconds;
 	begin
 		#(5 * SECOND);
 	end
 endtask;
-
 
 task wait_10_seconds;
 	begin
@@ -224,7 +281,7 @@ endtask;
 
 task wait_for_overflow;
 	begin
-		#((10000 / (CLOCK * 300)) + 1);
+		#(((10000 / 300) * CLOCK_CYCLE) + 3 * CLOCK_CYCLE );
 	end
 endtask;
 

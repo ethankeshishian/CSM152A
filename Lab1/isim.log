@@ -8,8 +8,4 @@ This is a Lite version of ISim.
 Time resolution is 1 ps
 # onerror resume
 # wave add /
-# run all
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-Stopped at time : 700 ns : File "/home/ise/CSM152A/Lab1/testbench_105422235.v" Line 67
 # exit 0

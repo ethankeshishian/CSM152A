@@ -32,7 +32,7 @@ module parking_meter(
     output reg a2,
     output reg a3,
     output reg a4,
-    output reg [3:0] val1, // consider not making these outputs reg
+    output reg [3:0] val1,
     output reg [3:0] val2,
     output reg [3:0] val3,
     output reg [3:0] val4
@@ -47,39 +47,18 @@ parameter S_RESET = 5'b00000;
 parameter S_RESET1 = 5'b00001;
 parameter S_RESET2  = 5'b00010;
 
-parameter S_ADD1 = 5'b00011;
-parameter S_ADD2 = 5'b00100;
-parameter S_ADD3 = 5'b00101;
-parameter S_ADD4 = 5'b00110;
-
-parameter S_ZERO = 5'b00111;
-parameter S_3MIN = 5'b01000;
-parameter S_COUNTING = 5'b01001;
-
-/* SAVED FOR LATER */
-// parameter FD_4 = 5'b01010;
-// 
-// parameter SD_1 = 5'b01011;
-// parameter SD_2 = 5'b01100;
-// parameter SD_3 = 5'b01101;
-// parameter SD_4 = 5'b01110;
-// 
-// parameter CV_1 = 5'b01111;
-// parameter CV_2 = 5'b10000;
-// parameter CV_3 = 5'b10001;
-// parameter CV_4 = 5'b10010;
-// 
-// parameter S_INVALID = 5'b10011;
-// parameter S_FAILED = 5'b10100;
+parameter S_ZERO = 5'b00011;
+parameter S_3MIN = 5'b00100;
+parameter S_COUNTING = 5'b00101;
 
 /* Internal variables */
 reg [5:0] current_state = S_ZERO;
 reg [5:0] next_state = S_ZERO;
 
-reg [13:0] timer = 14'b00000000000000; // Timer. Max is 14'b10011100001111 (9999)
-reg [6:0] clock_count = 0; // Clock counter. Max is 100 (for 100hz)
+reg [13:0] timer = 14'b00000000000000; // Timer for output
+reg [6:0] clock_count = 0; // Internal clock at 100hz
 
-// Always block for next state, sequential
+/* Always block for next state, sequential */
 always @(posedge clk) begin
 	if (rst) current_state <= S_RESET;
 	else if (rst1) current_state <= S_RESET1;
@@ -93,7 +72,7 @@ always @(posedge clk) begin
 	end
 end
 
-/* Always block that decides next state, combinational */
+/* Always block that decides next state and manages internal state, combinational */
 always @(*)
 case (current_state)
 
@@ -108,39 +87,23 @@ S_RESET2: begin
 	timer = 150;
 	next_state = S_3MIN;
 end
-S_ADD1: begin
-	timer = timer + 60;
-	fix_timer_overflow();
-	set_next_state();
-end
-S_ADD2: begin
-	timer = timer + 120;
-	fix_timer_overflow();
-	set_next_state();
-end
-S_ADD3: begin
-	timer = timer + 180;
-	fix_timer_overflow();
-	set_next_state();
-end
-S_ADD4: begin
-	timer = timer + 300;
-	fix_timer_overflow();
-	set_next_state();
-end
 S_ZERO: begin
+	timer = 0;
+	set_time();
 	set_next_state();
 end
 S_3MIN: begin
 	if (clock_count == MAX_CLOCK_COUNT) begin
 		timer = timer - 1;	
 	end
+	set_time();
 	set_next_state();
 end
 S_COUNTING: begin
 	if (clock_count == MAX_CLOCK_COUNT) begin
 		timer = timer - 1;	
 	end	
+	set_time();
 	set_next_state();
 end
 
@@ -151,7 +114,6 @@ always @(*)
 case(current_state)
 
 S_ZERO: begin
-	timer = 0;
 	if (clock_count >= 0 && clock_count <= MAX_CLOCK_COUNT / 2) begin
 		set_digits(MAX_CLOCK_COUNT, 0);
 	end
@@ -179,27 +141,35 @@ end
 S_RESET2: begin
 	set_digits(MAX_CLOCK_COUNT, 0);
 end
-//might have to account for multiple add presses. possible RESET also
 
 endcase
 
 
 /* Tasks */
-task set_next_state;
+task set_time;
 	begin
 		if (add1) begin
-			next_state = S_ADD1;
+			timer = timer + 60;
+			fix_timer_overflow();
 		end
 		else if (add2) begin
-			next_state = S_ADD2;
+			timer = timer + 120;
+			fix_timer_overflow();
 		end
 		else if (add3) begin
-			next_state = S_ADD3;
+			timer = timer + 180;
+			fix_timer_overflow();
 		end
 		else if (add4) begin
-			next_state = S_ADD4;
+			timer = timer + 300;
+			fix_timer_overflow();
 		end
-		else if (timer < 1) begin
+	end
+endtask;
+
+task set_next_state;
+	begin
+		if (timer < 1) begin
 			next_state = S_ZERO;
 		end
 		else if (timer < 180) begin
@@ -208,11 +178,6 @@ task set_next_state;
 		else begin
 			next_state = S_COUNTING;
 		end
-		/*
-		else begin
-			next_state = current_state;
-		end
-		*/
 	end
 endtask;
 
@@ -235,16 +200,16 @@ task set_digits;
 		val2 = ((timer % 1000) % 100) / 10;
 		val1 = ((timer % 1000) % 100) % 10;
 
-		if (clock_count % 4 == 0) begin
+		if (clock_count % 4 == 1) begin
 			set_one_digit(val1, 1, is_blank); 
 		end
-		else if (clock_count % 4 == 1) begin
+		else if (clock_count % 4 == 2) begin
 			set_one_digit(val2, 2, is_blank);
 		end
-		else if (clock_count % 4 == 2) begin
+		else if (clock_count % 4 == 3) begin
 			set_one_digit(val3, 3, is_blank);
 		end
-		//else if (clock_count % 4 == 3) begin
+		//else if (clock_count % 4 == 0) begin
 		else begin
 			set_one_digit(val4, 4, is_blank);
 		end
@@ -332,15 +297,3 @@ task set_one_digit;
 endtask;
 
 endmodule
-
-/*
-TODO:
-* clock to 100 (done)
-* 4 digit timing (done)
-* flash logic (done)
-	* might have to update function to divide by number
-* fix timer implementation according to what TA said (done)
-* add reset behavior
-* fix clock
-* testing
-*/

@@ -16,5 +16,4 @@ This is a Lite version of ISim.
 # run all
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
-Stopped at time : 81200 ms : File "/home/ise/CSM152A/lab4/testbench_105422235.v" Line 121
-# exit 0
+Stopped at time : 110120 ms : File "/home/ise/CSM152A/lab4/testbench_105422235.v" Line 171
